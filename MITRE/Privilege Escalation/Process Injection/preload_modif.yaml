@@ -1,0 +1,14 @@
+---
+apiVersion: security.accuknox.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: privilege-escalation-shared-object
+spec:
+  selectorLabels:
+    nodeSelector:
+      hostname: xyz
+  file:
+    matchPaths:
+      - path: /etc/ld.so.preload
+  action: AllowWithAudit
+  severity: 5
