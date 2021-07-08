@@ -2,11 +2,13 @@
 apiVersion: security.accuknox.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: privilege-escalation-shared-object
+  name: mitre-tactic-privilege-escalation-shared-object
+  namespace: multiubuntu #change it to your namespace
 spec:
-  selectorLabels:
-    nodeSelector:
-      hostname: xyz
+  severity: 5
+  selector:
+    matchLabels:
+      container: ubuntu-1 #change accordingly
   file:
     matchPaths:
       - path: /etc/ld.so.preload
