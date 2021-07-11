@@ -1,18 +1,20 @@
 ---
-apiVersion: security.accuknox.com/v1
+apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
-  name: persistence-bash-profile
+  name: mitre-persistence-bash-profile
+  namespace: testns
 spec:
-  selectorLabels:
-    nodeSelector:
-      hostname: xyz
-  file:
-    matchDirectories:
-      - dir: /etc/profile
-      - dir: /etc/bashrc
-    matchPatterns:
-      - pattern: [.bashrc, .bash_profile, .bash_history,
-                  .bash_login, .bash_logout, .inputrc, .profile]
-  action: Audit
   severity: 4
+  selector:
+    matchLabels:
+      container: ubuntu-test
+  file:
+    matchPaths:
+      - path: /root/.bash_profile
+        readOnly: true
+      - path: /root/.bashrc
+        readOnly: true
+      - path: /etc/profile
+        readOnly: true
+  action: Audit
