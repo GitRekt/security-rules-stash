@@ -8,7 +8,7 @@ spec:
   severity: 4
   selector:
     matchLabels:
-      container: ubuntu-test
+      container: ubuntu-1
   file:
     matchPaths:
       - path: /root/.bash_profile
